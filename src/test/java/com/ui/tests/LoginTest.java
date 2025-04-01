@@ -1,44 +1,34 @@
+	/*
+	 * How to ensure we write good Test Scripts
+	 * 1. Test Scripts have to be small
+	 * 2. You cannot have conditional statements, loops, try catch in your test methods
+	 * 		1st Test Scripts ----> then Test steps
+	 * 3. Reduce the use of local variables!!
+	 * 4. You should have at least one assertion!!
+	 */
 package com.ui.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import static com.constants.Browser.*;
 
-/*
- * Problems with the below code
- * 1. hardCoding of links
- * 2. Duplicacy of code
- * 3. TestData is attached to the script
- * 4. Naming convention is not followed
- * 5. Exception Handling is not done
- * 6. Synchronization is not done (findElement() method is not synchrnized, need to add explicitWait() at the minimum for synchronization)
- * 7. No Assertion present
- * 8. No Abstraction present
- */
+import static org.testng.Assert.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.ui.pages.HomePage;
 
 public class LoginTest {
 
-	public static void main(String[] args) {
-		WebDriver wd = new ChromeDriver(); // launches a Browser Window!! A Browser Session is created.
-		wd.get("http://automationpractice.pl/index.php?");
-		// maximize the browser window
-		wd.manage().window().maximize();
-		By signInLinkLocator = By.xpath("//a[contains(text(),\"Sign\")]");
-		WebElement signInLinkWebElement = wd.findElement(signInLinkLocator);
-		signInLinkWebElement.click();
+	HomePage homepage;
+	
+	@BeforeMethod(description = "Load the Homepage of the website")
+	public void setupMethod() {
+		homepage = new HomePage(CHROME);
+	}
+	
+	@Test(description = "Verifies if the valid user is able to login into the application", groups = {"e2e", "sanity"})
+	public void loginTest() {
 		
-		By emailTextBoxLocator = By.id("email");
-		WebElement emailTextBWebElement = wd.findElement(emailTextBoxLocator);
-		emailTextBWebElement.sendKeys("solih48913@gamebcs.com");
-		
-		By passwordTextBoxLocator = By.id("passwd");
-		WebElement passwordTextBWebElement = wd.findElement(passwordTextBoxLocator);
-		passwordTextBWebElement.sendKeys("Pass1234");
-		
-		By submitLoginButtonLocator = By.id("SubmitLogin");
-		WebElement submitLoginButtonWebElement = wd.findElement(submitLoginButtonLocator);
-		submitLoginButtonWebElement.click();
+		assertEquals(homepage.gotoLoginPage().doLoginWith("solih48913@gamebcs.com", "Pass1234").getUsername(), "Shardul Pakhare");
 		
 	}
 

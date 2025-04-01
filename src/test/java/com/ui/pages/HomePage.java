@@ -4,7 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.constants.Browser;
+import static com.constants.EnvironmentConstants.*;
 import com.utility.BrowserUtility;
+import com.utility.JSONUtility;
+
+import static com.utility.PropertiesUtil.*;
 
 public final class HomePage extends BrowserUtility{
 
@@ -12,20 +16,20 @@ public final class HomePage extends BrowserUtility{
 	
 	public HomePage(WebDriver driver) {
 		super(driver);
-		gotoWebsite("http://automationpractice.pl/index.php?");
+		gotoWebsite(readProperty(QA, "URL"));
 		maximizeWindow();
 	}
 	
 	public HomePage(Browser browserName) {
 		super(browserName);
-		gotoWebsite("http://automationpractice.pl/index.php?");
+//		gotoWebsite(readProperty(QA, "URL"));
+		gotoWebsite(JSONUtility.readJSON(QA));
 		maximizeWindow();
 	}
 	
 	// Never use void return type for Page Functions
 	public LoginPage gotoLoginPage() { // Page Functions
 		clickOn(SIGN_IN_LINK_LOCATOR);
-		LoginPage loginPage = new LoginPage(getDriver());
-		return loginPage;
+		return new LoginPage(getDriver());
 	}
 }

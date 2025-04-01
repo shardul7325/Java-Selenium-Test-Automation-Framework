@@ -1,0 +1,18 @@
+{
+	"data":[
+		{
+			"emailAddress":"shardulpakhare@gmail.com",
+			"password":"Pass1234"
+		},
+		
+		{
+			"emailAddress":"abc@gmail.com",
+			"password":"Pass1234"
+		},
+	
+		{
+			"emailAddress":"solih48913@gamebcs.com",
+			"password":"Pass1234"
+		}
+	]
+}

@@ -23,12 +23,12 @@ public class TestListener implements ITestListener {
 	  }
 	
 	public void onTestFailure(ITestResult result) {
-	    logger.info(result.getMethod().getMethodName() + " " + "FAILED");
-	    logger.info(result.getThrowable().getMessage());
+	    logger.error(result.getMethod().getMethodName() + " " + "FAILED");
+	    logger.error(result.getThrowable().getMessage());
 	  }
 	
 	public void onTestSkipped(ITestResult result) {
-	    logger.info(result.getMethod().getMethodName() + " " + "SKIPPED");
+	    logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
 	  }
 	
 	public void onStart(ITestContext context) {

@@ -27,6 +27,9 @@ public abstract class BrowserUtility {
 		else if(browserName == Browser.EDGE) {
 			driver = new EdgeDriver();
 		}
+		else {
+			logger.error("Invalid Browser name!! Please select one of the following Chrome or Edge.");
+		}
 	}
 	
 	public WebDriver getDriver() {

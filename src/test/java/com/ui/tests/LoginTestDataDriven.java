@@ -22,36 +22,29 @@ import com.ui.pojo.User;
 import com.utility.LoggerUtility;
 
 @Listeners({com.ui.listeners.TestListener.class})
-public class LoginTestDataDriven {
+public class LoginTestDataDriven extends TestBase {
 
-	HomePage homepage;
 	Logger logger = LoggerUtility.getLogger(this.getClass());
 	
-	@BeforeMethod(description = "Load the Homepage of the website")
-	public void setupMethod() {
-		logger.info("Loads the Homepage of the website");
-		homepage = new HomePage(CHROME);
+	@Test(description = "Verifies if the valid user is able to login into the application"
+			, groups = {"e2e", "sanity"}
+			, dataProviderClass = com.ui.dataProviders.LoginDataProvider.class
+			, dataProvider = "LoginTestDataProvider")
+	public void loginTest(User user) {
+		
+		assertEquals(homepage.gotoLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUsername(), "Shardul Pakhare");
+		
 	}
 	
-//	@Test(description = "Verifies if the valid user is able to login into the application"
-//			, groups = {"e2e", "sanity"}
-//			, dataProviderClass = com.ui.dataProviders.LoginDataProvider.class
-//			, dataProvider = "LoginTestDataProvider")
-//	public void loginTest(User user) {
-//		
-//		assertEquals(homepage.gotoLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUsername(), "Shardul Pakhare");
-//		
-//	}
-//	
-//	@Test(description = "Verifies if the valid user is able to login into the application"
-//			, groups = {"e2e", "sanity"}
-//			, dataProviderClass = com.ui.dataProviders.LoginDataProvider.class
-//			, dataProvider = "LoginTestCSVDataProvider")
-//	public void loginCSVTest(User user) {
-//		
-//		assertEquals(homepage.gotoLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUsername(), "Shardul Pakhare");
-//		
-//	}
+	@Test(description = "Verifies if the valid user is able to login into the application"
+			, groups = {"e2e", "sanity"}
+			, dataProviderClass = com.ui.dataProviders.LoginDataProvider.class
+			, dataProvider = "LoginTestCSVDataProvider")
+	public void loginCSVTest(User user) {
+		
+		assertEquals(homepage.gotoLoginPage().doLoginWith(user.getEmailAddress(), user.getPassword()).getUsername(), "Shardul Pakhare");
+		
+	}
 	
 	@Test(description = "Verifies if the valid user is able to login into the application"
 			, groups = {"e2e", "sanity"}

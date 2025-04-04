@@ -30,6 +30,13 @@ public final class HomePage extends BrowserUtility{
 		maximizeWindow();
 	}
 	
+	public HomePage(Browser browserName, boolean isHeadless) {
+		super(browserName, isHeadless);
+//		gotoWebsite(readProperty(QA, "URL"));
+		gotoWebsite(JSONUtility.readJSON(QA).getUrl());
+		maximizeWindow();
+	}
+	
 	// Never use void return type for Page Functions
 	public LoginPage gotoLoginPage() { // Page Functions
 		logger.info("Trying to perform click operation to goto Sign In page");

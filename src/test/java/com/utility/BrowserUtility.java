@@ -13,7 +13,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import com.constants.Browser;
 
@@ -39,6 +43,52 @@ public abstract class BrowserUtility {
 		}
 		else if(browserName == Browser.EDGE) {
 			driver.set(new EdgeDriver());;
+		}
+		else if(browserName == Browser.FIREFOX) {
+			driver.set(new FirefoxDriver());;
+		}
+		else {
+			logger.error("Invalid Browser name!! Please select one of the following Chrome or Edge.");
+		}
+	}
+	
+	public BrowserUtility(Browser browserName, boolean isHeadless) {
+		logger.info("Launching " + browserName + " browser");
+		
+		if(browserName == Browser.CHROME) {
+			if(isHeadless) {
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--headless=new");
+				options.addArguments("disable-gpu");
+				options.addArguments("--window-size=1920,1080");
+				driver.set(new ChromeDriver(options));				
+			}
+			else {
+				driver.set(new ChromeDriver());
+			}
+
+		}
+		else if(browserName == Browser.EDGE) {
+			if(isHeadless) {
+				EdgeOptions options = new EdgeOptions();
+				options.addArguments("--headless=new");
+				options.addArguments("disable-gpu");
+				driver.set(new EdgeDriver(options));				
+			}
+			else {
+				driver.set(new EdgeDriver());
+			}
+		}
+		else if(browserName == Browser.FIREFOX) {
+			if(isHeadless) {
+				FirefoxOptions options = new FirefoxOptions();
+				options.addArguments("--headless=new");
+				options.addArguments("disable-gpu");
+				driver.set(new FirefoxDriver(options));				
+			}
+			else {
+				driver.set(new FirefoxDriver());
+			}
 		}
 		else {
 			logger.error("Invalid Browser name!! Please select one of the following Chrome or Edge.");
@@ -94,6 +144,12 @@ public abstract class BrowserUtility {
 		}
 		
 		return path;
+	}
+	
+	public void quit() {
+		driver.get().close();
+		driver.get().quit();
+		
 	}
 	
 }

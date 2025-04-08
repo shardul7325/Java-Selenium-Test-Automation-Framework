@@ -20,7 +20,7 @@ public class MyRetryAnalyzer implements IRetryAnalyzer{
 			currentAttempt++;
 			return true;
 		}
-		
+		currentAttempt = 1;
 		return false;
 	}
 

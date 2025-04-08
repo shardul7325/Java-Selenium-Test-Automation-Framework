@@ -2,15 +2,15 @@
   "environments": {
     "DEV": {
       "url": "http://automationpractice.pl",
-	  "maxNumberOfAttempts": "3"
+	  "maxNumberOfAttempts": "2"
     },
     "QA": {
       "url": "http://automationpractice.pl",
-	  "maxNumberOfAttempts": "3"
+	  "maxNumberOfAttempts": "2"
     },
     "UAT": {
       "url": "http://automationpractice.pl",
-	  "maxNumberOfAttempts": "3"
+	  "maxNumberOfAttempts": "2"
     }
   }
 }

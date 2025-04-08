@@ -134,7 +134,9 @@ public abstract class BrowserUtility {
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
 		String timeStamp = dateFormat.format(date);
-		String path = "./screenshots/" + name + " - " + timeStamp + ".png";
+		String folderPath = "./extent-reports/screenshots/";
+		String fileName = name + " - " + timeStamp + ".png";
+		String path =  folderPath + fileName;
 		File screenshotFile = new File(path);
 		
 		try {
@@ -143,7 +145,7 @@ public abstract class BrowserUtility {
 			e.printStackTrace();
 		}
 		
-		return path;
+		return fileName;
 	}
 	
 	public void quit() {

@@ -3,11 +3,14 @@ package com.utility;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -120,11 +123,37 @@ public abstract class BrowserUtility {
 		webElement.sendKeys(textToEnter);
 	}
 	
+	public void enterSpecialKey(By locator, Keys keyToEnter) {
+		logger.info("Finding Element with the locator " + locator);
+		WebElement webElement = driver.get().findElement(locator);
+		logger.info("Found the element and now trying to enter key: " + keyToEnter);
+		webElement.sendKeys(keyToEnter);
+	}
+	
 	public String getVisibleText(By locator) {
 		logger.info("Finding Element with the locator " + locator);
 		WebElement webElement = driver.get().findElement(locator);
 		logger.info("Found the element and now trying to return the visible text: " + webElement.getText());
 		return webElement.getText();
+	}
+	
+	public String getVisibleText(WebElement element) {
+		
+		logger.info("Return the visible text: " + element.getText());
+		return element.getText();
+	}
+	
+	public List<String> getAllVisibleText(By locator) {
+		logger.info("Finding List of Elements with the locator " + locator);
+		List<WebElement> webElementsList = driver.get().findElements(locator);
+		logger.info("Found List of Elements and now trying to return the List of visible texts.");
+		
+		List<String> visibleTextList = new ArrayList<>();
+		for(WebElement wb: webElementsList) {
+			visibleTextList.add(getVisibleText(wb));
+		}
+		
+		return visibleTextList;
 	}
 	
 	public String takeScreenShot(String name) {

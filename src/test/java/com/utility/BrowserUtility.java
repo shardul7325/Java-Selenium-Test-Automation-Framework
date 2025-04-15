@@ -21,6 +21,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.constants.Browser;
 
@@ -116,11 +117,32 @@ public abstract class BrowserUtility {
 		webElement.click();
 	}
 	
+	public void clickOn(WebElement element) {
+		logger.info("Performing click operation on webelement" + element);
+		element.click();
+	}
+	
 	public void enterText(By locator, String textToEnter) {
 		logger.info("Finding Element with the locator " + locator);
 		WebElement webElement = driver.get().findElement(locator);
 		logger.info("Found the element and now trying to enter text: " + textToEnter);
 		webElement.sendKeys(textToEnter);
+	}
+	
+	public void clearText(By texBoxLocator) {
+		logger.info("Finding Element with the locator " + texBoxLocator);
+		WebElement webElement = driver.get().findElement(texBoxLocator);
+		logger.info("Element found and now clearing the test box");
+		webElement.clear();
+	}
+	
+	public void selectFromDropdown(By dropdownLocator, String optionToSelect) {
+		logger.info("Finding Element with the locator " + dropdownLocator);
+		WebElement element = driver.get().findElement(dropdownLocator);
+		Select select = new Select(element);
+		logger.info("Selecting the option " + optionToSelect);
+		select.selectByVisibleText(optionToSelect);
+
 	}
 	
 	public void enterSpecialKey(By locator, Keys keyToEnter) {
@@ -154,6 +176,14 @@ public abstract class BrowserUtility {
 		}
 		
 		return visibleTextList;
+	}
+	
+	public List<WebElement> getAllWebElements(By locator) {
+		logger.info("Finding List of Elements with the locator " + locator);
+		List<WebElement> webElementsList = driver.get().findElements(locator);
+		logger.info("Found List of Elements and now trying to return the List of Web Elements");
+		
+		return webElementsList;
 	}
 	
 	public String takeScreenShot(String name) {

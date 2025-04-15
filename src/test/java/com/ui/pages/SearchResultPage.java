@@ -11,7 +11,7 @@ import com.utility.BrowserUtility;
 public class SearchResultPage extends BrowserUtility {
 
 	private static final By PRODUCT_LISTING_TITLE_LOCATOR = By.xpath("//span[contains(@class,'lighter')]");
-	private static final By SEARCH_PRODUCTS_LISTS_LOCATOR = By.xpath("(//h5[contains(@itemprop,'name')])");
+	private static final By SEARCH_PRODUCTS_LISTS_LOCATOR = By.xpath("(//h5[contains(@itemprop,'name')]/a)");
 	
 	public SearchResultPage(WebDriver driver) {
 		super(driver);
@@ -29,6 +29,13 @@ public class SearchResultPage extends BrowserUtility {
 		.anyMatch(name -> (keywords.stream().anyMatch(name.toLowerCase():: contains)));
 		
 		return result;
+	}
+	
+	public ProductDetailPage clickOnProductAtIndex(int index) {
+		clickOn(getAllWebElements(SEARCH_PRODUCTS_LISTS_LOCATOR).get(index));
+		
+		ProductDetailPage productDetailPage = new ProductDetailPage(getDriver());
+		return productDetailPage;
 	}
 
 }

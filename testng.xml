@@ -9,6 +9,8 @@
        <class name="com.ui.tests.LoginTestDataDriven"/>
        <class name="com.ui.tests.LoginTestInvalidCredentials"/>
        <class name="com.ui.tests.SearchProductTest"/>
+       <class name="com.ui.tests.AddNewFirstAddressTest"/>
+       <class name="com.ui.tests.ProductCheckoutTest"/>
     </classes>
   </test>
 

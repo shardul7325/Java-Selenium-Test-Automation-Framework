@@ -21,6 +21,8 @@ public class AddressPage extends BrowserUtility {
 	private static final By STATE_DROPDOWN_LOCATOR = By.xpath("(//select[contains(@id,'id_state')])");
 	private static final By SAVE_ADDRESS_BUTTON_LOCATOR = By.xpath("(//button[contains(@id,'submitAddress')])");
 	private static final By ADDRESS_HEADING_LOCATOR = By.xpath("(//h3)");
+	
+	private static final By DELETE_ADDRESS_BUTTON_LOCATOR = By.xpath("//a[@title='Delete']");
 
 	
 	
@@ -45,6 +47,11 @@ public class AddressPage extends BrowserUtility {
 		clickOn(SAVE_ADDRESS_BUTTON_LOCATOR);
 		
 		return getVisibleText(ADDRESS_HEADING_LOCATOR);
+	}
+	
+	public void deleteUserAddress() {
+		clickOn(DELETE_ADDRESS_BUTTON_LOCATOR);
+		acceptAlert();
 	}
 
 }

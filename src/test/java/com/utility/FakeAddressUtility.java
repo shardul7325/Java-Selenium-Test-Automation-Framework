@@ -6,10 +6,6 @@ import com.github.javafaker.Faker;
 import com.ui.pojo.AddressPOJO;
 
 public class FakeAddressUtility {
-
-	public static void main(String[] args) {
-		getFakeAddress();
-	}
 	
 	public static AddressPOJO getFakeAddress() {
 		
